@@ -1,6 +1,30 @@
 !!!
 html
   head
+    meta(charset='UTF-8')
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+    link(rel='stylesheet', href='/stylesheets/base.css')
+    link(rel='stylesheet', href='/stylesheets/navigation.css')
+  body
+    div.nav-wrap
+      div#masthead
+        div#masthead-logo
+          a(href='http://loaclhost:3000/')
+            img(src='images/logo.gif', alt='websites logo')
+        div#masthead-nav
+          form(id='site-wide-search', action='')
+            input(placeholder='输入关键字')
+            button(type='submit') 搜索
+          p#account-service
+            a 管理我的信息 
+            a 我的账户 
+            a 退出
+      div#top-nav
+        ul
+           li
+             a 测试分类1
+           li
+             a 测试分类2
+           li
+             a 测试分类3
+    !=body
