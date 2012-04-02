@@ -1,0 +1,107 @@
+/*
+navigation start
+*/
+
+@g_width: 1000px;
+@g_margin: 0 auto;
+@g_padding: 0px 5px 0px 5px;
+
+
+.nav-wrap{
+    width: @g_width;
+    margin: @g_margin;
+    padding: @g_padding;
+    text-align: left;
+}
+#masthead{
+    height: 94px;
+    clear: both;
+    background: white;
+    position: relative;
+    z-index: 50;
+}
+#masthead-logo{
+    float: left;
+    display: block;
+    width: 340px;
+    height: 40px;
+    margin-top: 37px;
+    margin-left: -5px;
+}
+#masthead-nav{
+    width: @g_width - 340px;
+    float: right;
+}
+@deepblue: #001320;
+#site-wide-search{
+    display: block;
+    float: right;
+    text-align: right;
+    margin: 15px 0 0 0;
+    padding: 0;
+    z-index: 50;
+    border: 1px solid white;
+    position: relative;
+    input{
+        width: 175px;
+        height: 20px;
+        font-size: 1.2em;
+    }
+    button{
+        width: 70px;
+        height: 24px;
+        border: lighten(@deepblue, 10%);
+        background: lighten(@deepblue, 10%);
+        color: white;
+        font-weight: bold;
+    }
+}
+#account-service{
+    clear: both;
+    text-align: right;
+    font-size: 15px;
+    color: #666;
+    padding: 23px 0 0 0;
+    a{
+        color: #666;
+        text-decoration: none;
+        margin-left: 14px;
+        padding: 6px;
+        letter-spacing: .025em;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+#top-nav{
+    clear: both;
+    margin-left: -10px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 15px;
+    position: relative;
+    display: block;
+    height: 45px;
+    z-index: 50;
+    width: 1024px;
+    ul{
+        margin: 0;
+        padding: 0;
+        list-style-type: none !important;
+        li{
+            list-style-type: none !important;
+            float: left;
+            position: relative;
+            margin: 15px 10px 15px 10px;
+            a{
+                text-decoration: none;
+                color: #333;
+                font-weight: normal;
+                &:hover{
+                    color: darken(#333, 20%);
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
