@@ -2,9 +2,9 @@ mongoose = require 'mongoose'
 OrderSchema = require './ordermodel.js'
 
 Schema = mongoose.Schema
-ObjectId = UserSchema.ObjectId
+ObjectId = Schema.ObjectId
 
 ListSchema = new Schema
   orderid: [OrderSchema]
 
-exports = ListSchema
+exports.ListSchema = ListSchema

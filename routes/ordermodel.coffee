@@ -1,10 +1,10 @@
 mongoose = require 'mongoose'
 
 Schema = mongoose.Schema
-ObjectId = UserSchema.ObjectId
+ObjectId = Schema.ObjectId
 
 OrderSchema = new Schema
   bookid: String
   quantity: Number
 
-exports = OrderSchema
+exports.OrderSchema = OrderSchema
