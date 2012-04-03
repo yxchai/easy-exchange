@@ -16,4 +16,4 @@ BookSchema = new Schema
   bookclass: String
   booktags: String
 
-exports = BookSchema
+exports.BookSchema = BookSchema
