@@ -1,4 +1,4 @@
-var dbhandle = require('./dbhandle');
+var dbhandle = require('./dbmodel/');
 
 var User = dbhandle.UserModel;
 

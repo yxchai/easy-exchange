@@ -7,20 +7,24 @@ html
     link(rel='stylesheet', href='/stylesheets/navigation.css')
     link(rel='stylesheet', href='/stylesheets/page.css')
   body
-    div.nav-wrap
-      div#masthead
-        div#masthead-logo
-          a(href='http://loaclhost:3000/')
-            img(src='images/logo.gif', alt='websites logo')
-        div#masthead-nav
+    .nav-wrap
+      #masthead
+        #masthead-logo
+          a(href='http://localhost:3000/')
+            img(src='images/logo.png', alt='websites logo')
+        #masthead-nav
           form(id='site-wide-search', action='')
             input(placeholder='输入关键字')
             button(type='submit') 搜索
           p#account-service
-            a 管理我的信息 
-            a 我的账户 
-            a 退出
-      div#top-nav
+            if typeof user !== 'undefined'
+              a(href='/userinfo') 管理我的信息
+              a(href='/books') 我的书摊
+              a.exit(href='/exit') 退出
+            else
+              a(href='/login') 登录/注册
+            a.shopbaglink(href='/shopbag') 购物包
+      #top-nav
         ul
            li
              a 测试分类1
@@ -28,5 +32,5 @@ html
              a 测试分类2
            li
              a 测试分类3
-    div.page-wrap
+    .page-wrap
       !=body
