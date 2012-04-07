@@ -1,0 +1,22 @@
+if typeof errInfo !== 'undefined'
+  .errInfo= errInfo
+h1 个人购物账户
+.sign-in
+  h2 登录到我的账户
+  form(method='post', action='/login')
+    label 邮箱
+    input(type='email', name='email')
+    label 密码
+    input(type='password', name='password')
+    button(type='submit') 登录
+.create-account
+  h2 创建一个信账户
+  .account-warning 创建这个账户就是需要遵守我们网站的约定。如果您进行注册了则自行认为遵守我们的约定。如果有违约行为，后果自负。
+  form(method='post', action='/register')
+    label 输入邮箱地址
+    input(type='email', name='email')
+    label 输入密码
+    input(type='password', name='password')
+    //label 再输入一遍密码
+    //input(type='password')
+    button(type='submit') 创建账户

@@ -1,0 +1,14 @@
+if typeof errInfo !== 'undefined'
+  .errInfo= errInfo
+h1 个人购物账户
+h2 修改登录密码
+.outline
+  form(method='post', action='/userinfo')
+    h2 安全前提
+    p 修改密码前，您必须先输入当前密码
+    label 当前密码
+    input(id='password', name='password', type='password')
+    label 新密码
+    input(id='newpwd', name='newpwd', type='password')
+    button(type='submit') 修改
+
