@@ -3,7 +3,7 @@ var home = function(req, res) {
     var renderopt = {};
     if(getsession.user){
         var user = getsession.user;
-        console.log('homepage'+user);
+        console.log('homepage'+user.email||'');
         renderopt = {
             title: '欢迎来到Easy-Exchange 属于您的二手书交易平台',
             user: {
