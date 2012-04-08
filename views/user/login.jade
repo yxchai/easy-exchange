@@ -4,6 +4,7 @@ h1 个人购物账户
 .sign-in
   h2 登录到我的账户
   form(method='post', action='/user/auth')
+    input(type='hidden', name='redir', value=redirect)
     label 邮箱
     input(type='email', name='email')
     label 密码
