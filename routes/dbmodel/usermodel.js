@@ -29,8 +29,8 @@ UserSchema.statics.userAuth = function(obj, cb) {
     });
 };
 
-UserSchema.statics.findByName = function(name, cb) {
-    this.findOne({username: name}, cb);
+UserSchema.statics.findByEmail = function(email, cb) {
+    this.findOne({email: email}, cb);
 };
 
 module.exports = UserSchema;
