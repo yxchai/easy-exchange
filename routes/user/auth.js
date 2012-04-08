@@ -10,7 +10,8 @@ var auth = function(req, res) {
     User.userAuth({email: email,password: pwd},function(err, result) {
         if(!err){
             req.session.user = {email: email};
-            res.redirect('/');
+            console.log(body.redir);
+            res.redirect(body.redir);
         }else{
             renderopt.errInfo = err;
             res.render('user/login',renderopt);
