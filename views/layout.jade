@@ -10,7 +10,7 @@ html
     .nav-wrap
       #masthead
         #masthead-logo
-          a(href='http://localhost:3000/')
+          a(href='/')
             img(src='images/logo.png', alt='websites logo')
         #masthead-nav
           form(id='site-wide-search', action='')
@@ -18,11 +18,11 @@ html
             button(type='submit') 搜索
           p#account-service
             if typeof user !== 'undefined'
-              a(href='/userinfo') 管理我的信息
+              a(href='/user') 管理我的信息
               a(href='/books') 我的书摊
-              a.exit(href='/exit') 退出
+              a.exit(href='/user/exit') 退出
             else
-              a(href='/login') 登录/注册
+              a(href='/user/login') 登录/注册
             a.shopbaglink(href='/shopbag') 购物包
       #top-nav
         ul

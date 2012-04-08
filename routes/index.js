@@ -1,12 +1,11 @@
-var regpost = require('./regpost');
-var loginpost = require('./loginpost');
-
+var user =  require('./user/');
 var homeget = require('./home');
 
 exports.get = {
     home: homeget.home,
     login: homeget.login,
-    exit: homeget.exit
+    exit: homeget.exit,
+    userinfo: homeget.userinfo
 };
 
 exports.post = {

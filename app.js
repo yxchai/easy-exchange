@@ -4,7 +4,8 @@
  */
 
 var express = require('express'),
-    routeshandle = require('./routes/');
+    user = require('./routes/user/'),
+    home = require('./routes/home');
 
 var app = module.exports = express.createServer();
 
@@ -32,14 +33,14 @@ app.configure('production', function(){
 
 // Routes
 
-var get = routeshandle.get,
-    post = routeshandle.post;
-app.get('/', get.home);
-app.get('/login', get.login);
-app.get('/exit', get.exit);
-app.post('/register', post.register);
-app.post('/login', post.login);
-app.post('/userinfo', post.userinf);
+app.get('/', home);
+app.get('/user', user.info);
+app.get('/user/login', user.login);
+app.get('/user/edit', user.edit);
+app.get('/user/exit', user.exit);
+app.post('/user/add', user.add);
+app.post('/user/auth', user.auth);
+app.put('/user/edit', user.putedit);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
