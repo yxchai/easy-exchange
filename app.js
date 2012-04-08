@@ -33,10 +33,12 @@ app.configure('production', function(){
 
 // Routes
 
+var requiresLogin = user.session;
+
 app.get('/', home);
-app.get('/user', user.info);
+app.get('/user', requiresLogin, user.info);
 app.get('/user/login', user.login);
-app.get('/user/edit', user.edit);
+app.get('/user/edit', requiresLogin, user.edit);
 app.get('/user/exit', user.exit);
 app.post('/user/add', user.add);
 app.post('/user/auth', user.auth);
