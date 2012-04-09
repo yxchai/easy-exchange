@@ -19,12 +19,12 @@ UserSchema.statics.userAuth = function(obj, cb) {
     this.findOne({email: obj.email}, function(err,doc) {
         if(!err){
             if(doc.password === obj.password){
-                cb(err, true);
+                cb(err, doc);
             }else{
-                cb('用户名或密码错误', false);
+                cb('用户名或密码错误', doc);
             }
         }else{
-            cb(err, false);
+            cb(err, doc);
         }
     });
 };
