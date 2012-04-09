@@ -14,6 +14,7 @@ var auth = function(req, res) {
             res.redirect(body.redir);
         }else{
             renderopt.errInfo = err;
+            renderopt.redirect = body.redir;
             res.render('user/login',renderopt);
         }
     });
