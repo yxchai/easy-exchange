@@ -5,5 +5,6 @@ module.exports = {
     auth: require('./auth'),
     exit: require('./exit'),
     session: require('./session'),
-    edit: require('./edit')
+    edit: require('./edit'),
+    putedit: require('./putedit')
 };
