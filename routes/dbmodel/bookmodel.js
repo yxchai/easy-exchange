@@ -12,4 +12,12 @@ var BookSchema = new Schema({
     booktags: String
 });
 
+BookSchema.methods.update = function(obj) {
+    var item;
+    for(item in this){
+        this[item] = obj[item] ? obj[item] : this[item];
+    }
+};
+
+
 module.exports = BookSchema;
