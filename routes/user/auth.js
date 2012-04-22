@@ -9,7 +9,7 @@ var auth = function(req, res) {
         renderopt = {title: '登录'};
     User.userAuth({email: email,password: pwd},function(err, result) {
         if(!err){
-            req.session.user = {email: email};
+            req.session.user = {email: email, uid: result._id};
             console.log(body.redir);
             res.redirect(body.redir);
         }else{
