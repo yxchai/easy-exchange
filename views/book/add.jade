@@ -1,0 +1,12 @@
+h1 添加新的图书
+.outline
+  form(method='post', action='/book/insert')
+    label 书名
+    input(name='book[bookname]', type='text')
+    label 描述
+    textarea(name='book[bookdesc]', type='text', cols='60', rows='10')
+    label 数量
+    input(name='book[bookcount]', type='text')
+    label 分类
+    input(name='book[bookclass]', type='text')
+    button(type='submit') 添加
