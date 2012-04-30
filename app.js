@@ -5,7 +5,8 @@
 
 var express = require('express'),
     user = require('./routes/user/'),
-    home = require('./routes/home');
+    home = require('./routes/home'),
+    book = require('./routes/book');
 
 var app = module.exports = express.createServer();
 
@@ -36,6 +37,8 @@ app.configure('production', function(){
 var requiresLogin = user.session;
 
 app.get('/', home);
+
+//user router
 app.get('/user', requiresLogin, user.info);
 app.get('/user/login', user.login);
 app.get('/user/edit', requiresLogin, user.edit);
@@ -43,6 +46,12 @@ app.get('/user/exit', user.exit);
 app.post('/user/add', user.add);
 app.post('/user/auth', user.auth);
 app.put('/user/edit', user.putedit);
+
+//book router
+app.get('/book/add', requiresLogin, book.add);
+app.post('/book/insert', book.insert);
+app.get('/books', requiresLogin, book.getall);
+app.get('/book', requiresLogin, book.getall);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

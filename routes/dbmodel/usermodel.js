@@ -33,6 +33,28 @@ UserSchema.statics.findByEmail = function(email, cb) {
     this.findOne({email: email}, cb);
 };
 
+UserSchema.statics.getBook = function(uid, bid, cb) {
+    this.findOne({_id: uid}, function(err, doc) {
+        if(!err){
+            if(doc){
+                var result = doc.books.id(bid);
+                cb(result);
+            }
+        }
+    });
+};
+
+UserSchema.statics.getAll = function(uid, cb) {
+    this.findOne({_id: uid}, function(err, doc) {
+        if(!err){
+            if(doc){
+                var result = doc.books;
+                cb(result);
+            }
+        }
+    });
+};
+
 UserSchema.statics.addBook = function(uid, obj, cb) {
     this.findOne({_id: uid}, function(err, doc) {
         if(!err){
@@ -57,7 +79,7 @@ UserSchema.statics.updateBook = function(uid, bid, obj, cb) {
     this.findOne({_id: uid}, function(err, doc) {
         if(!err){
             if(doc){
-                doc.delBook(bid, obj, cb);
+                doc.updateBook(bid, obj, cb);
             }
         }
     });
