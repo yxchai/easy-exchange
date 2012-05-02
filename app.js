@@ -48,10 +48,13 @@ app.post('/user/auth', user.auth);
 app.put('/user/edit', user.putedit);
 
 //book router
-app.get('/book/add', requiresLogin, book.add);
-app.post('/book/insert', book.insert);
+app.get('/books/add', requiresLogin, book.add);
+app.post('/books/insert', book.insert);
 app.get('/books', requiresLogin, book.getall);
 app.get('/book', requiresLogin, book.getall);
+app.get('/books/:bid', book.info);
+app.get('/books/:bid/edit', requiresLogin, book.edit);
+app.put('/books/edit', book.update);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
