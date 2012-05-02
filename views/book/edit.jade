@@ -1,0 +1,14 @@
+h1 修改图书
+.outline
+  form(method='post', action='/books/edit')
+    input(type='hidden', name='_method', value='PUT')
+    input(type='hidden', name='bid', value=book._id)
+    label 书名
+    input(name='book[bookname]', type='text', value=book.bookname)
+    label 描述
+    textarea(name='book[bookdesc]', type='text', cols='60', rows='10')= book.bookdesc
+    label 数量
+    input(name='book[bookcount]', type='text', value=book.bookcount)
+    label 分类
+    input(name='book[bookclass]', type='text', value=book.bookclass)
+    button(type='submit') 修改
