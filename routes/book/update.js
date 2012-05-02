@@ -11,7 +11,7 @@ var updateBook = function(req, res) {
         renderopt = {title: 'Error'};
     User.updateBook(uid, bid, obj, function() {
         console.log('update success');
-        res.redir('/');
+        res.redirect('/books/' + bid);
     });
 };
 
