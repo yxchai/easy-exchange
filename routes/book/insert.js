@@ -10,7 +10,7 @@ var addBook = function(req, res) {
         renderopt = {title: 'Error'};
     User.addBook(uid, obj, function() {
         console.log('add success');
-        res.redirect('/');
+        res.redirect('/books');
     });
 };
 

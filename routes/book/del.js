@@ -9,7 +9,7 @@ var delBook = function(req, res) {
         renderopt = {title: 'Error'};
     User.addBook(uid, bid, function() {
         console.log('add success');
-        res.redir('/');
+        res.redirect('/');
     });
 };
 
