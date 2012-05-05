@@ -9,7 +9,8 @@ var getall = function(req, res) {
         console.log('get all book success');
         var renderopt = {
             books: result,
-            title: "所有图书"
+            title: "所有图书",
+            user: user
         };
         res.render('book/all', renderopt);
     });

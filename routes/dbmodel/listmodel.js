@@ -8,4 +8,8 @@ var ListSchema = new Schema({
     orderid: [OrderSchema]
 });
 
+ListSchema.statics.generate = function(obj, cb) {
+    
+};
+
 module.exports = ListSchema;

@@ -2,10 +2,11 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var OrderSchema = new Schema({
+var RequestSchema = new Schema({
     bookid: String,
-    uid: String,
+    sellerid: String,
+    buyerid: String,
     count: Number
 });
 
-module.exports = OrderSchema;
+module.exports = RequestSchema;

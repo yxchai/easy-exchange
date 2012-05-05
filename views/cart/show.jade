@@ -1,0 +1,14 @@
+h1 购物车
+if typeof cart !== 'undefined' || cart.length !== 0
+  for item in cart
+    div.cartitem
+      h2 书名
+      p= item.bookname
+      h2 数量
+      form(method='post', action='/cart/update')
+        input.shopcount(type='text', value= item.count, name='count')
+        input.shopbid(type='hidden', value= item.bid, name='bid')
+        input.shopuid(type='hidden', value= item.uid, name='uid')
+        button(type='submit') 修改
+      a.cartdel(href='#') 删除
+  button#cartconfirm 确认购买

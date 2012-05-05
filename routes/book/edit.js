@@ -11,7 +11,8 @@ var edit = function(req, res) {
         console.log('edit get book success');
         var renderopt = {
             title: "图书修改",
-            book: result
+            book: result,
+            user: user
         };
         res.render('book/edit', renderopt);
     });

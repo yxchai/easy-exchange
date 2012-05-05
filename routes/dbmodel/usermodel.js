@@ -8,7 +8,9 @@ var UserSchema = new Schema({
     email: String,
     password: String,
     group: Number,
-    books: [BookSchema]
+    books: [BookSchema],
+    requests: [String],
+    deals: [String]
 });
 
 UserSchema.statics.checkEmail = function(email, cb) {
@@ -33,8 +35,25 @@ UserSchema.statics.findByEmail = function(email, cb) {
     this.findOne({email: email}, cb);
 };
 
+UserSchema.statics.getBookById = function(bid, cb) {
+    this.find({}, function(err, doc) {
+        if(!err){
+            if(doc){
+                for (var i = 0; i < doc.length; i++) {
+                    var result = doc[i].books.id(bid);
+                    if(result){
+                        cb(result, doc[i]._id);
+                        return;
+                    }
+                }
+                cb(false);
+            }
+        }
+    });
+};
+
 UserSchema.statics.getBook = function(uid, bid, cb) {
-    this.findOne({_id: uid}, function(err, doc) {
+    this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
                 var result = doc.books.id(bid);
@@ -45,7 +64,7 @@ UserSchema.statics.getBook = function(uid, bid, cb) {
 };
 
 UserSchema.statics.getAll = function(uid, cb) {
-    this.findOne({_id: uid}, function(err, doc) {
+    this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
                 var result = doc.books;
@@ -56,7 +75,7 @@ UserSchema.statics.getAll = function(uid, cb) {
 };
 
 UserSchema.statics.addBook = function(uid, obj, cb) {
-    this.findOne({_id: uid}, function(err, doc) {
+    this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
                 doc.addBook(obj, cb);
@@ -66,7 +85,7 @@ UserSchema.statics.addBook = function(uid, obj, cb) {
 };
 
 UserSchema.statics.delBook = function(uid, bid, cb) {
-    this.findOne({_id: uid}, function(err, doc) {
+    this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
                 doc.delBook(bid, cb);
@@ -76,7 +95,7 @@ UserSchema.statics.delBook = function(uid, bid, cb) {
 };
 
 UserSchema.statics.updateBook = function(uid, bid, obj, cb) {
-    this.findOne({_id: uid}, function(err, doc) {
+    this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
                 doc.updateBook(bid, obj, cb);
@@ -84,6 +103,28 @@ UserSchema.statics.updateBook = function(uid, bid, obj, cb) {
         }
     });
 };
+
+UserSchema.statics.addRequest = function(uid, str, cb) {
+    this.findById(uid, function(err, doc) {
+        if(!err){
+            if(doc){
+                doc.addRequest(str, cb);
+            }
+        }
+    });
+};
+
+UserSchema.statics.removeRequest = function(uid, rid, cb) {
+    this.findById(uid, function(err, doc) {
+        if(!err){
+            if(doc){
+                doc.removeRequest(str,cb);
+            }
+        }
+    });
+};
+
+//methods
 
 UserSchema.methods.addBook = function(obj, cb) {
     this.books.push(obj);
@@ -110,6 +151,30 @@ UserSchema.methods.updateBook =  function(bid, obj, cb) {
             cb();
         }
     });
+};
+
+UserSchema.methods.addRequest = function(str, cb) {
+    this.requests.push(str);
+    this.save(function(err) {
+        if(!err){
+            cb();
+        }
+    });
+};
+
+UserSchema.methods.removeRequest = function(rid, cb) {
+    for (var i = 0; i < this.requests.length; i++) {
+        if(this.requests[i] == rid){
+            this.requests[i].remove();
+            this.save(function(err) {
+                if(!err){
+                    cb(true);
+                    return;
+                }
+            });
+        }
+    }
+    cb(false);
 };
 
 module.exports = UserSchema;

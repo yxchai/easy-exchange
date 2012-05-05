@@ -7,4 +7,14 @@ h2 分类
 p= book.bookclass
 h2 数量
 p= book.bookcount
-a(href='/books/' + book._id + '/edit') 修改
+//a(href='/books/' + book._id + '/edit') 修改
+div
+  label 数量
+  input(type='text', id='cartcount')
+  button(id='addcart') 添加到购物车
+form(method='post', action='/trade/buy')
+  input(id='bid', type='hidden', value=book._id)
+  input(id='uid', type='hidden', value=uid)
+  label 数量
+  input(type='text')
+  button(type='submit') 购买

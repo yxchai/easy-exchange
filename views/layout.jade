@@ -6,6 +6,8 @@ html
     link(rel='stylesheet', href='/stylesheets/base.css')
     link(rel='stylesheet', href='/stylesheets/navigation.css')
     link(rel='stylesheet', href='/stylesheets/page.css')
+    script(type='text/javascript', src='/javascripts/jquery-1.7.2.js')
+    script(type='text/javascript', src='/javascripts/main.js')
   body
     .nav-wrap
       #masthead
@@ -23,7 +25,7 @@ html
               a.exit(href='/user/exit') 退出
             else
               a(href='/user/login') 登录/注册
-            a.shopbaglink(href='/shopbag') 购物包
+            a.shopbaglink(href='/cart/show') 购物包
       #top-nav
         ul
            li

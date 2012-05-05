@@ -3,17 +3,22 @@ var dbhandle = require('../dbmodel/');
 var User = dbhandle.UserModel;
 
 var info =  function(req, res) {
-    var user = req.session.user,
-        uid = user.uid,
-        params = req.params,
-        bid = params.bid;
-    User.getBook(uid, bid, function(result) {
-        console.log('get book success');
-        var renderopt = {
-            title: "图书信息",
-            book: result
-        };
-        res.render('book/info', renderopt);
+    var params = req.params,
+        bid = params.bid,
+        user = req.session.user;
+    User.getBookById(bid, function(result, uid) {
+        if(result && uid){
+            console.log('get book success'+uid);
+            var renderopt = {
+                title: "图书信息",
+                book: result,
+                user: user,
+                uid: uid
+            };
+            res.render('book/info', renderopt);
+        }else{
+            res.redirect('/');
+        }
     });
 };
 
