@@ -10,8 +10,12 @@ var UserSchema = new Schema({
     group: Number,
     books: [BookSchema],
     requests: [String],
-    deals: [String]
+    trades: [String]
 });
+
+UserSchema.path('books').default([]);
+UserSchema.path('requests').default([]);
+UserSchema.path('trades').default([]);
 
 UserSchema.statics.checkEmail = function(email, cb) {
     this.findOne({email: email}, cb);
@@ -36,17 +40,23 @@ UserSchema.statics.findByEmail = function(email, cb) {
 };
 
 UserSchema.statics.getBookById = function(bid, cb) {
-    this.find({}, function(err, doc) {
+    this.findOne({'books._id': bid}, function(err, doc) {
         if(!err){
             if(doc){
-                for (var i = 0; i < doc.length; i++) {
-                    var result = doc[i].books.id(bid);
-                    if(result){
-                        cb(result, doc[i]._id);
-                        return;
-                    }
+                var result = doc.books.id(bid);
+                if(result){
+                    cb(result, doc._id);
+                    return;
                 }
                 cb(false);
+                //for (var i = 0; i < doc.length; i++) {
+                //    var result = doc[i].books.id(bid);
+                //    if(result){
+                //        cb(result, doc[i]._id);
+                //        return;
+                //    }
+                //}
+                //cb(false);
             }
         }
     });
@@ -58,7 +68,11 @@ UserSchema.statics.getBook = function(uid, bid, cb) {
             if(doc){
                 var result = doc.books.id(bid);
                 cb(result);
+            }else{
+                cb(false);
             }
+        }else{
+            cb(false);
         }
     });
 };
@@ -104,11 +118,47 @@ UserSchema.statics.updateBook = function(uid, bid, obj, cb) {
     });
 };
 
-UserSchema.statics.addRequest = function(uid, str, cb) {
-    this.findById(uid, function(err, doc) {
+UserSchema.statics.addRequest = function(tmpobj, cb) {
+    var promise = 0,
+        error = 0,
+        sellerid = tmpobj.sellerid,
+        buyerid = tmpobj.buyerid,
+        str = tmpobj._id,
+        count = tmpobj.count,
+        bookid = tmpobj.bookid,
+        that = this,
+        onedone = function() {
+            promise += 1;
+            if(error){
+                that.removeRequest(buyerid, str, function() {
+                    //wait
+                });
+            }
+            if(promise == 2){
+                cb(false);
+            }
+        };
+    this.findById(sellerid, function(err, doc) {
         if(!err){
             if(doc){
-                doc.addRequest(str, cb);
+                doc.countReduce(bookid, count, function(err) {
+                    error = err;
+                    if(!err){
+                        doc.addRequest(str, onedone);
+                    }else{
+                        that.removeRequest(sellerid, str, function() {
+                            //wait
+                        });
+                        cb(err);
+                    }
+                });
+            }
+        }
+    });
+    this.findById(buyerid, function(err, doc) {
+        if(!err){
+            if(doc){
+                doc.addRequest(str, onedone);
             }
         }
     });
@@ -118,7 +168,17 @@ UserSchema.statics.removeRequest = function(uid, rid, cb) {
     this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
-                doc.removeRequest(str,cb);
+                doc.removeRequest(rid,cb);
+            }
+        }
+    });
+};
+
+UserSchema.statics.removeRequestById = function(uid, urid, cb) {
+    this.findById(uid, function(err, doc) {
+        if(!err){
+            if(doc){
+                doc.removeRequestById(urid, cb);
             }
         }
     });
@@ -163,18 +223,43 @@ UserSchema.methods.addRequest = function(str, cb) {
 };
 
 UserSchema.methods.removeRequest = function(rid, cb) {
+    var exist = false;
     for (var i = 0; i < this.requests.length; i++) {
         if(this.requests[i] == rid){
-            this.requests[i].remove();
+            exist = true;
+            this.requests.splice(i, 1);
             this.save(function(err) {
                 if(!err){
                     cb(true);
-                    return;
                 }
             });
         }
     }
-    cb(false);
+    if(!exist){
+        cb(false);
+    }
 };
 
+UserSchema.methods.removeRequestById = function(urid, cb) {
+    this.requests.id(urid).remove();
+    this.save(function(err) {
+        if(!err){
+            cb();
+        }
+    });
+};
+
+UserSchema.methods.countReduce = function(bid, num, cb) {
+    var book = this.books.id(bid);
+    if(book.bookcount >= num){
+        book.bookcount -= num;
+        this.save(function(err) {
+            if(!err){
+                cb(false);
+            }
+        });
+    }else{
+        cb('overflow');
+    }
+};
 module.exports = UserSchema;

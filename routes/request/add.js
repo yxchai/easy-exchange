@@ -15,7 +15,7 @@ var add = function(req, res) {
         var newreq = new Request(obj);
         newreq.save(function(err) {
             if(!err){
-                cb(obj);
+                cb(newreq);
             }
         });
     };
@@ -26,10 +26,32 @@ var add = function(req, res) {
                 bookid: tmp.bid,
                 sellerid: tmp.uid,
                 buyerid: user.uid,
+                buyeremail: user.email,
                 count: tmp.count
             };
-            reqsave(obj, function(tmpobj) {
-                // add to the user request
+            User.findById(tmp.uid, function(err, doc) {
+                if(!err){
+                    if(doc){
+                        obj.selleremail = doc.email;
+                        reqsave(obj, function(tmpobj) {
+                            User.addRequest(tmpobj, function(error) {
+                                if(!error){
+                                    console.log('no err');
+                                    promise += 1;
+                                }else{
+                                    console.log('tmpobj._id  ' + tmpobj._id);
+                                    Request.remove({_id: tmpobj._id}, function(err) {
+                                        console.log('remove err  ' + err);
+                                    });
+                                    arrlen -= 1;
+                                }
+                                if(promise === arrlen){
+                                    res.send('success');
+                                }
+                            });
+                        });
+                    }
+                }
             });
         }
     }

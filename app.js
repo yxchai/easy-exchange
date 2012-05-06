@@ -9,6 +9,7 @@ var express = require('express'),
     home = require('./routes/home'),
     book = require('./routes/book'),
     cart = require('./routes/cart'),
+    request = require('./routes/request'),
     MongoStore = require('connect-mongo')(express);
 
 var app = module.exports = express.createServer();
@@ -68,6 +69,11 @@ app.post('/cart/add', cart.add);
 app.get('/cart/show', cart.show);
 app.post('/cart/del', cart.del);
 app.post('/cart/update', cart.update);
+
+//request router
+app.post('/request/add', request.add);
+app.get('/request/show', request.show);
+app.post('/request/del', request.del);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

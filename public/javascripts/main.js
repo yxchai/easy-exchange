@@ -12,6 +12,7 @@ $(function() {
                 alert(data);
             }
         });
+        return false;
     });
     $('.cartdel').click(function() {
         var btn = $(this);
@@ -27,6 +28,7 @@ $(function() {
                 btn.parent().remove();
             }
         });
+        return false;
     });
     $('#cartconfirm').click(function() {
         var arr = [];
@@ -45,7 +47,27 @@ $(function() {
         $.post('/request/add', {cartitem: arr}, function(data) {
             if(data){
                 console.log(data);
+                window.location.href = '/request/show';
             }
         });
+        return false;
+    });
+    $('.reqdel').click(function() {
+        var rid = $(this).siblings('.rid').text();
+        var buyerid = $(this).siblings('.buyerid').text();
+        var sellerid = $(this).siblings('.sellerid').text();
+        var that = this;
+        $.post('/request/del',{
+            rid: rid,
+            buyerid: buyerid,
+            sellerid: sellerid
+        }, function(data) {
+            if(data){
+                if(data == 'success'){
+                    $(that).parent().remove();
+                }
+            }
+        });
+        return false;
     });
 });

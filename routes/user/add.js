@@ -17,7 +17,10 @@ var add = function(req, res) {
                     renderopt.errInfo = err;
                     res.render('user/login', renderopt);
                 }else{
-                    req.session.user = {email: email};
+                    req.session.user = {
+                        email: email,
+                        uid: tmpuser._id 
+                    };
                     res.redirect('/');
                 }
             });

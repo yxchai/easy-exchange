@@ -21,6 +21,8 @@ html
           p#account-service
             if typeof user !== 'undefined'
               a(href='/user') 管理我的信息
+              a(href='/request/show') 请求
+              a(href='/trade/show') 订单
               a(href='/books') 我的书摊
               a.exit(href='/user/exit') 退出
             else

@@ -14,13 +14,15 @@ var show = function(req, res) {
         var promise = 0;
         var getDetail = function(elem) {
             User.getBook(elem.uid, elem.bid, function(result) {
-                var obj = {
-                    uid: elem.uid,
-                    bid: elem.bid,
-                    bookname: result.bookname,
-                    count: elem.count
-                };
-                renderopt.cart.push(obj);
+                if(result){
+                    var obj = {
+                        uid: elem.uid,
+                        bid: elem.bid,
+                        bookname: result.bookname,
+                        count: elem.count
+                    };
+                    renderopt.cart.push(obj);
+                }
                 promise++;
                 if(promise === cart.length){
                     res.render('cart/show', renderopt);

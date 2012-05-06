@@ -11,3 +11,4 @@ var RequestModel = mongoose.model('RequestModel', request);
 
 exports.UserModel = UserModel;
 exports.ListModel = ListModel;
+exports.RequestModel = RequestModel;
