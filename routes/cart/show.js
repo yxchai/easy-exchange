@@ -13,15 +13,17 @@ var show = function(req, res) {
     if(cart && cart.length !== 0){
         var promise = 0;
         var getDetail = function(elem) {
-            User.getBook(elem.uid, elem.bid, function(result) {
-                if(result){
-                    var obj = {
-                        uid: elem.uid,
-                        bid: elem.bid,
-                        bookname: result.bookname,
-                        count: elem.count
-                    };
-                    renderopt.cart.push(obj);
+            User.getBook(elem.uid, elem.bid, function(err, result) {
+                if(!err){
+                    if(result){
+                        var obj = {
+                            uid: elem.uid,
+                            bid: elem.bid,
+                            bookname: result.bookname,
+                            count: elem.count
+                        };
+                        renderopt.cart.push(obj);
+                    }
                 }
                 promise++;
                 if(promise === cart.length){

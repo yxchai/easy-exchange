@@ -1,4 +1,6 @@
 var dbhandle = require('../dbmodel/');
+var checkcount = require('./checkcount');
+var dbremove = require('./remove');
 
 var Request = dbhandle.RequestModel,
     User = dbhandle.UserModel;
@@ -29,30 +31,67 @@ var add = function(req, res) {
                 buyeremail: user.email,
                 count: tmp.count
             };
-            User.findById(tmp.uid, function(err, doc) {
+            checkcount(obj.sellerid, obj.bookid, obj.count, function(err, result) {
                 if(!err){
-                    if(doc){
-                        obj.selleremail = doc.email;
-                        reqsave(obj, function(tmpobj) {
-                            User.addRequest(tmpobj, function(error) {
-                                if(!error){
-                                    console.log('no err');
-                                    promise += 1;
-                                }else{
-                                    console.log('tmpobj._id  ' + tmpobj._id);
-                                    Request.remove({_id: tmpobj._id}, function(err) {
-                                        console.log('remove err  ' + err);
-                                    });
-                                    arrlen -= 1;
-                                }
-                                if(promise === arrlen){
-                                    res.send('success');
-                                }
-                            });
+                    obj.selleremail = result.email;
+                    var anywrong = false,
+                        checkrender = function(needobj) {
+                            if(anywrong){
+                                arrlen -= 1;
+                                dbremove(needobj._id, needobj.buyerid, needobj.sellerid, function(success) {
+                                });
+                            }
+                            if(promise === arrlen){
+                                res.send('success');
+                            }
+                        };
+                    reqsave(obj, function(tmpobj) {
+                        result.addRequest(tmpobj._id, function(err) {
+                            if(!err){
+                                promise += 1;
+                                checkrender(tmpobj);
+                            }else{
+                                anywrong += err;
+                            }
                         });
-                    }
+                        User.addRequest(tmpobj.buyerid, tmpobj._id, function(error) {
+                            if(!error){
+                                promise += 1;
+                                checkrender(tmpobj);
+                            }else{
+                                anywrong += err;
+                            }
+                        });
+                    });
+                }else{
+                    console.log('checkcount error: ' + err);
+                    res.send(err);
                 }
             });
+//            User.findById(tmp.uid, function(err, doc) {
+//                if(!err){
+//                    if(doc){
+//                        obj.selleremail = doc.email;
+//                        reqsave(obj, function(tmpobj) {
+//                            User.addRequest(tmpobj, function(error) {
+//                                if(!error){
+//                                    console.log('no err');
+//                                    promise += 1;
+//                                }else{
+//                                    console.log('tmpobj._id  ' + tmpobj._id);
+//                                    Request.remove({_id: tmpobj._id}, function(err) {
+//                                        console.log('remove err  ' + err);
+//                                    });
+//                                    arrlen -= 1;
+//                                }
+//                                if(promise === arrlen){
+//                                    res.send('success');
+//                                }
+//                            });
+//                        });
+//                    }
+//                }
+//            });
         }
     }
 };

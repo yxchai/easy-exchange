@@ -49,14 +49,6 @@ UserSchema.statics.getBookById = function(bid, cb) {
                     return;
                 }
                 cb(false);
-                //for (var i = 0; i < doc.length; i++) {
-                //    var result = doc[i].books.id(bid);
-                //    if(result){
-                //        cb(result, doc[i]._id);
-                //        return;
-                //    }
-                //}
-                //cb(false);
             }
         }
     });
@@ -67,12 +59,12 @@ UserSchema.statics.getBook = function(uid, bid, cb) {
         if(!err){
             if(doc){
                 var result = doc.books.id(bid);
-                cb(result);
+                cb(err, result, doc);
             }else{
-                cb(false);
+                cb('none', false);
             }
         }else{
-            cb(false);
+            cb(err, false);
         }
     });
 };
@@ -118,48 +110,12 @@ UserSchema.statics.updateBook = function(uid, bid, obj, cb) {
     });
 };
 
-UserSchema.statics.addRequest = function(tmpobj, cb) {
-    var promise = 0,
-        error = 0,
-        sellerid = tmpobj.sellerid,
-        buyerid = tmpobj.buyerid,
-        str = tmpobj._id,
-        count = tmpobj.count,
-        bookid = tmpobj.bookid,
-        that = this,
-        onedone = function() {
-            promise += 1;
-            if(error){
-                that.removeRequest(buyerid, str, function() {
-                    //wait
-                });
-            }
-            if(promise == 2){
-                cb(false);
-            }
-        };
-    this.findById(sellerid, function(err, doc) {
+UserSchema.statics.addRequest = function(uid, rid, cb) {
+    this.findById(uid, function(err, doc) {
         if(!err){
-            if(doc){
-                doc.countReduce(bookid, count, function(err) {
-                    error = err;
-                    if(!err){
-                        doc.addRequest(str, onedone);
-                    }else{
-                        that.removeRequest(sellerid, str, function() {
-                            //wait
-                        });
-                        cb(err);
-                    }
-                });
-            }
-        }
-    });
-    this.findById(buyerid, function(err, doc) {
-        if(!err){
-            if(doc){
-                doc.addRequest(str, onedone);
-            }
+            doc.addRequest(rid, cb);
+        }else{
+            cb(err);
         }
     });
 };
@@ -215,11 +171,7 @@ UserSchema.methods.updateBook =  function(bid, obj, cb) {
 
 UserSchema.methods.addRequest = function(str, cb) {
     this.requests.push(str);
-    this.save(function(err) {
-        if(!err){
-            cb();
-        }
-    });
+    this.save(cb);
 };
 
 UserSchema.methods.removeRequest = function(rid, cb) {

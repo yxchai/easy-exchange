@@ -7,14 +7,16 @@ var edit = function(req, res) {
         uid = user.uid,
         params = req.params,
         bid = params.bid;
-    User.getBook(uid, bid, function(result) {
-        console.log('edit get book success');
-        var renderopt = {
-            title: "图书修改",
-            book: result,
-            user: user
-        };
-        res.render('book/edit', renderopt);
+    User.getBook(uid, bid, function(err, result) {
+        if(!err){
+            console.log('edit get book success');
+            var renderopt = {
+                title: "图书修改",
+                book: result,
+                user: user
+            };
+            res.render('book/edit', renderopt);
+        }
     });
 };
 

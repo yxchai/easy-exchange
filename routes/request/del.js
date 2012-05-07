@@ -1,7 +1,4 @@
-var dbhandle = require('../dbmodel');
-
-var User = dbhandle.UserModel;
-var Request = dbhandle.RequestModel;
+var dbremove = require('./remove');
 
 var del = function(req, res) {
     var body = req.body,
@@ -10,24 +7,8 @@ var del = function(req, res) {
         rid =  body.rid,
         buyerid = body.buyerid,
         sellerid = body.sellerid;
-    Request.remove({_id: rid}, function(err) {
-        if(!err){
-            var promise = 0;
-            User.removeRequest(buyerid, rid, function(success) {
-                console.log('remove buyer request success');
-                promise += 1;
-                if(promise === 2){
-                    res.send('success');
-                }
-            });
-            User.removeRequest(sellerid, rid, function(success) {
-                console.log('remove seller request success');
-                promise += 1;
-                if(promise === 2){
-                    res.send('success');
-                }
-            });
-        }
+    dbremove(rid, buyerid, sellerid, function(success) {
+        res.send(success);
     });
 };
 
