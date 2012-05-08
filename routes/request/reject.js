@@ -1,6 +1,6 @@
 var dbremove = require('./remove');
 
-var del = function(req, res) {
+var reject = function(req, res) {
     var body = req.body,
         session = req.session,
         user = session.user,
@@ -14,4 +14,4 @@ var del = function(req, res) {
     });
 };
 
-module.exports = del;
+module.exports = reject;

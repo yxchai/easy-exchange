@@ -56,11 +56,15 @@ $(function() {
         var rid = $(this).siblings('.rid').text();
         var buyerid = $(this).siblings('.buyerid').text();
         var sellerid = $(this).siblings('.sellerid').text();
+        var bookid = $(this).siblings('.bookid').text();
+        var count = $(this).siblings('.count').text();
         var that = this;
         $.post('/request/del',{
             rid: rid,
             buyerid: buyerid,
-            sellerid: sellerid
+            sellerid: sellerid,
+            bookid: bookid,
+            count: count
         }, function(data) {
             if(data){
                 if(data == 'success'){

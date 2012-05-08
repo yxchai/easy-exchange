@@ -124,7 +124,20 @@ UserSchema.statics.removeRequest = function(uid, rid, cb) {
     this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
-                doc.removeRequest(rid,cb);
+                doc.removeRequest(rid, cb);
+            }
+        }
+    });
+};
+
+UserSchema.statics.removeSellerRequest = function(uid, rid, bookid, count, cb) {
+    this.findById(uid, function(err, doc) {
+        if(!err){
+            if(doc){
+                var bookcount = doc.books.id(bookid).bookcount;
+                bookcount = bookcount*1 + count*1;
+                doc.books.id(bookid).bookcount = bookcount;
+                doc.removeRequest(rid, cb);
             }
         }
     });

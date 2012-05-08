@@ -38,7 +38,7 @@ var add = function(req, res) {
                         checkrender = function(needobj) {
                             if(anywrong){
                                 arrlen -= 1;
-                                dbremove(needobj._id, needobj.buyerid, needobj.sellerid, function(success) {
+                                dbremove(needobj._id, needobj.buyerid, needobj.sellerid, needobj.bookid, needobj.count, function(success) {
                                 });
                             }
                             if(promise === arrlen){
@@ -46,6 +46,9 @@ var add = function(req, res) {
                             }
                         };
                     reqsave(obj, function(tmpobj) {
+                        var bookcount = result.books.id(obj.bookid).bookcount;
+                        bookcount = bookcount*1 - obj.count*1;
+                        result.books.id(obj.bookid).bookcount = bookcount;
                         result.addRequest(tmpobj._id, function(err) {
                             if(!err){
                                 promise += 1;

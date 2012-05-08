@@ -3,16 +3,18 @@ for item in requests
   div
     h2 买家
     p= item.buyeremail
-    p.buyerid= item.buyerid
+    p.buyerid.hide= item.buyerid
     h2 卖家
     p= item.selleremail
-    p.sellerid= item.sellerid
+    p.sellerid.hide= item.sellerid
     h2 书名
     p= item.bookname
+    p.bookid.hide= item.bookid
     h2 数量
-    p= item.count
+    p.count= item.count
     p.rid.hide= item._id
     if user.uid == item.buyerid
       a.reqdel(href='request/del') 删除
     if user.uid == item.sellerid
       a.reqconfirm(href='request/confiem') 确认交易
+      a.reject(href='request/reject') 拒绝
