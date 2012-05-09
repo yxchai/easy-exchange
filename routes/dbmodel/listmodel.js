@@ -6,11 +6,8 @@ var Schema = mongoose.Schema,
 var ListSchema = new Schema({
     sellerid: String,
     buyerid: String,
-    rid: String
+    bookid: String,
+    count: Number
 });
-
-ListSchema.statics.generate = function(sellerid, buyerid, cb) {
-    
-};
 
 module.exports = ListSchema;
