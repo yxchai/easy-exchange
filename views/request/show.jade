@@ -10,11 +10,14 @@ for item in requests
     h2 书名
     p= item.bookname
     p.bookid.hide= item.bookid
+    h2 价格
+    p= item.money + '元'
     h2 数量
     p.count= item.count
     p.rid.hide= item._id
     if user.uid == item.buyerid
-      a.reqdel(href='request/del') 删除
+      a.reqdel(href='/request/del') 删除
     if user.uid == item.sellerid
-      a.reqconfirm(href='request/confiem') 确认交易
-      a.reject(href='request/reject') 拒绝
+      a.reqconfirm(href='/request/confirm') 确认交易
+      br
+      a.reject(href='/request/reject') 拒绝

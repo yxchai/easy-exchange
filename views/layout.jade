@@ -30,12 +30,18 @@ html
             a.shopbaglink(href='/cart/show') 购物包
       #top-nav
         ul
-           li
-             a 测试分类1
-           li
-             a 测试分类2
-           li
-             a 测试分类3
+          li
+            a(href='/category/fiction') 小说
+          li
+            a(href='/category/pop') 流行
+          li
+            a(href='/category/culture') 文化
+          li
+            a(href='/category/life') 生活
+          li
+            a(href='/category/eco') 经管
+          li
+            a(href='/category/tech') 科技
     .page-wrap
       if typeof errInfo !== 'undefined'
         .errInfo= errInfo

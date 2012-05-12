@@ -2,11 +2,29 @@ h1 添加新的图书
 .outline
   form(method='post', action='/books/insert')
     label 书名
+    br
     input(name='book[bookname]', type='text')
+    br
     label 描述
+    br
     textarea(name='book[bookdesc]', type='text', cols='60', rows='10')
+    br
+    label 价格
+    br
+    input(name='book[bookmoney]', type='text')
+    label 元
+    br
     label 数量
+    br
     input(name='book[bookcount]', type='text')
+    br
     label 分类
-    input(name='book[bookclass]', type='text')
+    br
+    select(name='book[bookclass]', id='class')
+      for item in category
+        option(value=item.name)= item.name
+    select(name='book[booksubclass]', id='subclass')
+      for item in category[0].subtag
+        option(value=item.name)= item.name
+    br
     button(type='submit') 添加

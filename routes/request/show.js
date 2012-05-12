@@ -37,9 +37,19 @@ var show = function(req, res) {
         if(typeof requests === 'undefined' || requests.length === 0){
             renderpage();
         }else{
-            Request.getRequests(requests, function(doc) {
-                for (var i = 0; i < doc.length; i++) {
-                    getDetail(i, doc);
+            Request.getRequests(requests, function(err, result) {
+                if(!err){
+                    if(result){
+                        if(result.length !== 0){
+                            for (var i = 0; i < result.length; i++) {
+                                getDetail(i, result);
+                            }
+                        }else{
+                            requests = [];
+                            doc.save();
+                            renderpage();
+                        }
+                    }
                 }
             });
         }

@@ -4,5 +4,5 @@ module.exports = {
     confirm: require('./confirm'),
     del: require('./del'),
     reject: require('./reject'),
-    confirm: require('./confirm')
+    addone: require('./addone')
 };

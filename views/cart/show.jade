@@ -4,6 +4,8 @@ if typeof cart !== 'undefined' || cart.length !== 0
     div.cartitem
       h2 书名
       p= item.bookname
+      h2 价格
+      p= item.bookmoney + '元'
       h2 数量
       form(method='post', action='/cart/update')
         input.shopcount(type='text', value= item.count, name='count')

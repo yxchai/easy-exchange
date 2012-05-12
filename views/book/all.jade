@@ -1,12 +1,18 @@
 a(href='/books/add') 添加图书
+h1 图书信息
 for book in books
-  h1 图书信息
-  h2 书名
-  a(href='/books/' + book._id)= book.bookname
-  h2 描述
-  p= book.bookdesc
-  h2 分类
-  p= book.bookclass
-  h2 数量
-  p= book.bookcount
-  a(href='/books/' + book._id + '/edit') 修改
+  if book.count != 0
+    div
+      h2 书名
+      a(href='/books/' + book._id)= book.bookname
+      h2 描述
+      p= book.bookdesc
+      h2 分类
+      p= book.bookclass + '/' + book.booksubclass
+      h2 价格
+      p= book.bookmoney + '元'
+      h2 数量
+      p= book.bookcount
+      a(href='/books/' + book._id + '/edit') 修改
+      br
+      a(href='/books/' + book._id + '/del') 删除

@@ -9,7 +9,7 @@ $(function() {
             uid: uid
         }, function(data) {
             if(data){
-                alert(data);
+                alert('添加成功');
             }
         });
         return false;
@@ -73,5 +73,43 @@ $(function() {
             }
         });
         return false;
+    });
+    $('.reqconfirm').click(function() {
+        var rid = $(this).siblings('.rid').text();
+        var buyerid = $(this).siblings('.buyerid').text();
+        var sellerid = $(this).siblings('.sellerid').text();
+        var bookid = $(this).siblings('.bookid').text();
+        var count = $(this).siblings('.count').text();
+        var that = this;
+        $.post('/request/confirm',{
+            rid: rid,
+            buyerid: buyerid,
+            sellerid: sellerid,
+            bookid: bookid,
+            count: count
+        }, function(data) {
+            if(data){
+                if(data == 'success'){
+                    window.location.href = '/trade/show';
+                }else{
+                    window.location.reload();
+                }
+            }
+        });
+        return false;
+    });
+    $('#class').change(function() {
+        var choosen = $(this).find('option:selected').text();
+        var subclass = $('#subclass');
+        subclass.children().remove();
+        subclass.append('<option value="请稍后">请稍后</option>');
+        $.get('/category/search/',{
+            qstr: choosen
+        },function(data) {
+            subclass.children().remove();
+            for (var i = 0; i < data.length; i++) {
+                subclass.append('<option value=' + data[i].name + '>' + data[i].name + '</option>');
+            }
+        });
     });
 });

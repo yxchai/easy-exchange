@@ -8,7 +8,9 @@ var BookSchema = new Schema({
     bookimg: [String],
     bookdetail: String,
     bookcount: Number,
+    bookmoney: Number,
     bookclass: String,
+    booksubclass: String,
     booktags: String
 });
 

@@ -10,7 +10,10 @@ var express = require('express'),
     book = require('./routes/book'),
     cart = require('./routes/cart'),
     request = require('./routes/request'),
+    trade = require('./routes/trade'),
+    category = require('./routes/category'),
     MongoStore = require('connect-mongo')(express);
+require('./routes/category/get');
 
 var app = module.exports = express.createServer();
 
@@ -63,6 +66,7 @@ app.get('/book', requiresLogin, book.getall);
 app.get('/books/:bid', book.info);
 app.get('/books/:bid/edit', requiresLogin, book.edit);
 app.put('/books/edit', book.update);
+app.get('/books/:bid/del', requiresLogin, book.del);
 
 //cart router
 app.post('/cart/add', cart.add);
@@ -74,6 +78,17 @@ app.post('/cart/update', cart.update);
 app.post('/request/add', request.add);
 app.get('/request/show', request.show);
 app.post('/request/del', request.del);
+app.post('/request/confirm', request.confirm);
+app.post('/request/addone', request.addone);
+
+//trade router
+app.get('/trade/show', trade.show);
+app.get('/trade/show/:tid', trade.show);
+
+//category router
+app.get('/category/search', category.search);
+app.get('/category/:num', category.page);
+app.get('/category/:num/:subnum', category.subpage);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

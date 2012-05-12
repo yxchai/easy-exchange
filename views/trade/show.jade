@@ -1,0 +1,19 @@
+h1 全部已确认订单
+for item in trades
+  div 
+    h2 买家信息
+    p= item.buyer.email
+    h2 卖家信息
+    p= item.seller.email
+    h2 图书名
+    if item.book === null
+      p= '该图书已删除'
+    else
+      p= item.book.bookname
+    h2 价格
+    if item.book === null
+      p= '该图书已删除'
+    else
+      p= item.book.bookmoney + '元'
+    h2 数量
+    p= item.count

@@ -12,17 +12,7 @@ var RequestSchema = new Schema({
 });
 
 RequestSchema.statics.getRequests = function(arr, cb) {
-    this.find().where('_id').in(arr).run(function(err, doc) {
-        if(!err){
-            if(doc){
-                cb(doc);
-            }else{
-                cb([]);
-            }
-        }else{
-            cb([]);
-        }
-    });
+    this.find().where('_id').in(arr).run(cb);
 };
 
 module.exports = RequestSchema;

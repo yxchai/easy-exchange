@@ -8,6 +8,7 @@ var addBook = function(req, res) {
         uid = uinfo.uid,
         obj = body.book,
         renderopt = {title: 'Error'};
+    console.log(obj);
     User.addBook(uid, obj, function() {
         console.log('add success');
         res.redirect('/books');

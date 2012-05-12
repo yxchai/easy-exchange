@@ -7,6 +7,7 @@ var getall = function(req, res) {
         uid = user.uid;
     User.getAll(uid, function(result) {
         console.log('get all book success');
+        console.log(result);
         var renderopt = {
             books: result,
             title: "所有图书",

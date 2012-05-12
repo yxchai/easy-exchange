@@ -134,6 +134,7 @@ UserSchema.statics.removeSellerRequest = function(uid, rid, bookid, count, cb) {
     this.findById(uid, function(err, doc) {
         if(!err){
             if(doc){
+                console.log('bookid:'+bookid);
                 var bookcount = doc.books.id(bookid).bookcount;
                 bookcount = bookcount*1 + count*1;
                 doc.books.id(bookid).bookcount = bookcount;
@@ -149,6 +150,34 @@ UserSchema.statics.removeRequestById = function(uid, urid, cb) {
             if(doc){
                 doc.removeRequestById(urid, cb);
             }
+        }
+    });
+};
+
+UserSchema.statics.addTrade = function(buyerid, sellerid, tid, cb) {
+    var promise = 0;
+    var callback = function(err) {
+        promise += 1;
+        if(promise === 2){
+            cb(err);
+        }
+    };
+    this.findById(buyerid, function(err, doc) {
+        if(!err){
+            if(doc){
+                doc.addTrade(tid, callback);
+            }
+        }else{
+            callback(err);
+        }
+    });
+    this.findById(sellerid, function(err, doc) {
+        if(!err){
+            if(doc){
+                doc.addTrade(tid, callback);
+            }
+        }else{
+            callback(err);
         }
     });
 };
@@ -227,4 +256,10 @@ UserSchema.methods.countReduce = function(bid, num, cb) {
         cb('overflow');
     }
 };
+
+UserSchema.methods.addTrade = function(tid, cb) {
+    this.trades.push(tid);
+    this.save(cb);
+};
+
 module.exports = UserSchema;

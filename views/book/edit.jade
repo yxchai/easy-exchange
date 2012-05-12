@@ -4,11 +4,36 @@ h1 修改图书
     input(type='hidden', name='_method', value='PUT')
     input(type='hidden', name='bid', value=book._id)
     label 书名
+    br
     input(name='book[bookname]', type='text', value=book.bookname)
+    br
     label 描述
+    br
     textarea(name='book[bookdesc]', type='text', cols='60', rows='10')= book.bookdesc
+    br
+    label 价格
+    br
+    input(name='book[bookmoney]', type='text', value= book.bookmoney)
+    label 元
+    br
     label 数量
-    input(name='book[bookcount]', type='text', value=book.bookcount)
+    br
+    input(name='book[bookcount]', type='text', value= book.bookcount)
+    br
     label 分类
-    input(name='book[bookclass]', type='text', value=book.bookclass)
+    br
+    select(name='book[bookclass]', id='class')
+      for item in category
+        if item.name == book.bookclass
+          option(value=item.name, selected='selected')= item.name
+          - selected = item;
+        else
+          option(value=item.name)= item.name
+    select(name='book[booksubclass]', id='subclass')
+      for item in selected.subtag
+        if item.name == book.booksubclass
+          option(value=item.name, selected='selected')= item.name
+        else
+          option(value=item.name)= item.name
+    br
     button(type='submit') 修改

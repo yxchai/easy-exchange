@@ -4,7 +4,9 @@ p= book.bookname
 h2 描述
 p= book.bookdesc
 h2 分类
-p= book.bookclass
+p= book.bookclass + '/' + book.booksubclass
+h2 价格
+p= book.bookmoney + '元'
 h2 数量
 p= book.bookcount
 //a(href='/books/' + book._id + '/edit') 修改
@@ -12,9 +14,9 @@ div
   label 数量
   input(type='text', id='cartcount')
   button(id='addcart') 添加到购物车
-form(method='post', action='/trade/buy')
-  input(id='bid', type='hidden', value=book._id)
-  input(id='uid', type='hidden', value=uid)
+form(method='post', action='/request/addone')
+  input(name='cartitem[bid]', id='bid', type='hidden', value=book._id)
+  input(name='cartitem[uid]',id='uid', type='hidden', value=uid)
   label 数量
-  input(type='text')
+  input(name='cartitem[count]',type='text')
   button(type='submit') 购买
