@@ -1,5 +1,6 @@
 @page_width: 500px;
 @div_padding: 5px;
+@content: 1000px;
 
 .sign-in, .create-account{
     width: @page_width/4*3;
@@ -25,4 +26,153 @@
 }
 .hide{
     display: none;
+}
+.left{
+    float: left;
+}
+.dtitle{
+    font: bold;
+    color: gray;
+}
+.bdtitle{
+    color: gray;
+    font: 20px bold;
+}
+.btitle{
+    font: 20px bold;
+}
+.bdltitle{
+    color: gray;
+    font: 16px bold;
+}
+.break{
+    height: 10px;
+}
+.money{
+    color: red;
+}
+.homelist{
+    width: @content;
+    clear: both;
+    div{
+        width: 200px;
+        float: left;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+.addtocart{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font: 15px bold;
+    text-decoration: underline;
+}
+.btm{
+    margin-bottom: 10px;
+}
+.blist{
+    clear: both;
+}
+.blistinfo{
+    width: 150px;
+    float: left;
+    margin: 10px 20px 10px 10px;
+}
+.blisttool{
+    width: 50px;
+    float: left;
+    margin: 10px 20px 10px 10px;
+}
+.blistimg{
+    width: 150px;
+    float: left;
+    margin: 10px 20px 10px 10px;
+    text-align: center;
+    font-size: 20px;
+}
+.blistdesc{
+    width: 500px;
+    float: left;
+    margin: 10px 20px 10px 10px;
+    font-size: 15px;
+}
+.mgtitle{
+    font:15px bold;
+    color: gray;
+}
+.mtitle{
+    font: 15px bold;
+}
+.upmove{
+    margin-top: -8px;
+    font: 20px bold;
+}
+.bookimg{
+    float: left;
+    margin-right: 20px;
+}
+.bookinfo{
+    float: left;
+    width: @content - 200px;
+    p{
+        font-size: 16px;
+    }
+}
+.cartitem{
+    clear: both;
+    font: 20px bold;
+    div.left{
+        margin-right: 50px;
+    }
+}
+.reqitem{
+    vertical-align: middle;
+    clear: both;
+    font: 1.4em bold;
+    div.left{
+        text-align: center;
+        padding-top: 40px;
+        margin-right: 20px;
+    }
+}
+#cartconfirm{
+    clear: both;
+    display: block;
+}
+.category{
+    clear: both;
+    ul{
+        width: 100px;
+        font: 14px bold;
+        li{
+            list-style: none;
+            margin-bottom: 5px;
+            a{
+                color: black;
+            }
+        }
+        margin: 0;
+    }
+}
+td, th 
+{
+    font-size:1.3em;
+    border:1px solid darken(#003153, 10%);
+    padding:3px 7px 2px 7px;
+}
+
+th 
+{
+    font-size:1.5em;
+    text-align:left;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#003153;
+    color:#ffffff;
+}
+
+tr.alt td 
+{
+    color:#000000;
+    background-color: lighten(#003153, 80%);
 }

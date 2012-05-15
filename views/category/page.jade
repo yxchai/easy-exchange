@@ -1,19 +1,32 @@
-ul
-  for subca in cate
-    li
-      a(href='/category/' + curcate + '/' + subca.num)= subca.name
-for item in doc
-  for book in item.books
-    if book.bookclass == bookclass
-      h1 图书信息
-      div
-        h2 书名
-        a(href='/books/' + book._id)= book.bookname
-        h2 描述
-        p= book.bookdesc
-        h2 分类
-        p= book.bookclass + '/' + book.booksubclass
-        h2 价格
-        p= book.bookmoney + '元'
-        h2 数量
-        p= book.bookcount
+div.category
+  ul.left
+    span.mgtitle 子分类
+    br
+    br
+    for subca in cate
+      li
+        a(href='/category/' + curcate + '/' + subca.num)= subca.name
+  div.left
+    for item in doc
+      for book in item.books
+        if book.bookclass == bookclass
+          div.blist
+            div.blistimg
+              img(src= book.bookimage, height='80')
+              br
+              a(href='/books/' + book._id)= book.bookname
+            div.blistinfo
+              span.mgtitle 分类: 
+              span.mtitle= book.bookclass + '/' + book.booksubclass
+              .break
+              span.mgtitle 新旧程度: 
+              span.mtitle= book.bookoldrate + '%'
+              .break
+              span.mgtitle 价格: 
+              span.money= book.bookmoney + '元'
+              .break
+              span.mgtitle 数量: 
+              span.mtitle= book.bookcount
+            div.blistdesc
+              span.mgtitle 描述
+              span.mtitle= book.bookdesc

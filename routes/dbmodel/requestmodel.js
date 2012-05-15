@@ -8,6 +8,7 @@ var RequestSchema = new Schema({
     selleremail: String,
     buyerid: String,
     buyeremail: String,
+    money: Number,
     count: Number
 });
 

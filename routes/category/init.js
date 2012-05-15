@@ -130,7 +130,16 @@ var category = [
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/easytest');
+var boundServices = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) : null;
+var credentials = null;
+var db = null;
+if(boundServices == null){
+    db = mongoose.connect('mongodb://localhost/easytest');
+}else{
+    credentials = boundServices['mongodb-1.8'][0]['credentials'];
+    db = mongoose.connect('mongodb://' + credentials['username'] + ':' + credentials['password'] + '@' + credentials['hostname'] + ':' + credentials['port'] + '/' + credentials['db']);
+}
+
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId,
     Mixed = Schema.Types.Mixed;
@@ -144,6 +153,12 @@ var run = function() {
     var tmp = new Tag({category: category});
     tmp.save();
 };
+
+Tag.findOne({}, function(err, doc) {
+    if(!doc){
+        run();
+    }
+});
 
 //run();
 

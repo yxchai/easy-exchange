@@ -1,19 +1,46 @@
 h1 全部已确认订单
 for item in trades
-  div 
-    h2 买家信息
-    p= item.buyer.email
-    h2 卖家信息
-    p= item.seller.email
-    h2 图书名
-    if item.book === null
-      p= '该图书已删除'
-    else
-      p= item.book.bookname
-    h2 价格
-    if item.book === null
-      p= '该图书已删除'
-    else
-      p= item.book.bookmoney + '元'
-    h2 数量
-    p= item.count
+  div.reqitem
+    div.left(style='padding: 0; width: 110px;')
+      if item.book !== null
+        img(src= item.book.bookimage, width='100')
+      else
+        img(src= '/images/default.jpg', width='100')
+      br
+      if item.book !== null
+        a(href='/books/' + item.book._id)= item.book.bookname
+      else
+        a(href='/books/')= '该图书已删除'
+    div.left(style='width: 180px;')
+      div 买家信息
+      span 姓名：
+      span= item.buyer.username
+      br
+      span QQ:
+      span= item.buyer.qq
+      br
+      span 手机:
+      span= item.buyer.phone
+    div.left(style='width: 180px;')
+      div 卖家信息
+      span 姓名：
+      span= item.seller.username
+      br
+      span QQ:
+      span= item.seller.qq
+      br
+      span 手机:
+      span= item.seller.phone
+    div.left(style='width: 100px;')
+      div 新旧程度
+      if item.book !== null
+        span= item.book.bookoldrate + '%'
+      else
+        span= '该图书已删除'
+    div.left(style='width: 80px;')
+      div 价格
+      span.money= item.money + '元'
+    div.left(style='width: 80px;')
+      div 数量
+      span.count= item.count
+

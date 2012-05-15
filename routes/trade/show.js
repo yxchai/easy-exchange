@@ -30,6 +30,7 @@ var show = function(req, res) {
                         promise = 0;
                     tmp.bookid = doc.bookid;
                     tmp.count = doc.count;
+                    tmp.money = doc.money;
                     User.findById(doc.buyerid, function(err, doc) {
                         if(!err){
                             if(doc){
@@ -66,6 +67,9 @@ var show = function(req, res) {
                             }
                         }
                     });
+                }else{
+                    torender += 1;
+                    render();
                 }
             }
         });

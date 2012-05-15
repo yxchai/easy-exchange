@@ -7,6 +7,9 @@ var UserSchema = new Schema({
     username: String,
     email: String,
     password: String,
+    username: String,
+    qq: String,
+    phone: String,
     group: Number,
     books: [BookSchema],
     requests: [String],
@@ -46,9 +49,9 @@ UserSchema.statics.getBookById = function(bid, cb) {
                 var result = doc.books.id(bid);
                 if(result){
                     cb(result, doc._id);
-                    return;
+                }else{
+                    cb(false);
                 }
-                cb(false);
             }
         }
     });

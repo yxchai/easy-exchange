@@ -19,7 +19,7 @@ var page = function(req, res) {
         session = req.session,
         user = session.user;
     User.find().where('books.booksubclass', tmp.name)
-    .select('books._id','books.bookclass','books.bookname', 'books.bookdesc', 'books.bookclass', 'books.booksubclass', 'books.bookcount', 'books.bookmoney')
+    .select('books._id','books.bookclass','books.bookname', 'books.bookdesc', 'books.bookclass', 'books.booksubclass', 'books.bookcount', 'books.bookmoney', 'books.bookoldrate', 'books.bookimage')
     .run(function(err, doc) {
         if(!err){
             if(doc){

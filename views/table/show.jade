@@ -1,0 +1,27 @@
+h1 统计信息
+table
+  tr
+    th 书名
+    th 现有数量
+    th 现有价格
+    th 售出数量
+    th 收入金额
+  - var odd = 0
+  for row in rows
+    - if(odd == 0){
+    - odd += 1
+      tr
+        td= row.bookname
+        td= row.count
+        td= row.money
+        td= row.outcount
+        td= row.inmoney
+    - }else{
+    - odd -= 1
+      tr.alt
+        td= row.bookname
+        td= row.count
+        td= row.money
+        td= row.outcount
+        td= row.inmoney
+    - }

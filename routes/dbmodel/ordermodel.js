@@ -4,7 +4,6 @@ var mongoose = require('mongoose'),
 
 var OrderSchema = new Schema({
     bookid: String,
-    uid: String,
     count: Number
 });
 

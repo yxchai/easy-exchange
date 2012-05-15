@@ -3,10 +3,12 @@ $(function() {
         var count = $('#cartcount').val();
         var bid = $('#bid').val();
         var uid = $('#uid').val();
+        var money = $('#money').val();
         var jqxhr = $.post('/cart/add', {
             count: count,
             bid: bid,
-            uid: uid
+            uid: uid,
+            money: money
         }, function(data) {
             if(data){
                 alert('添加成功');
@@ -33,16 +35,19 @@ $(function() {
     $('#cartconfirm').click(function() {
         var arr = [];
         $('.cartitem').each(function() {
-            var form = $(this).children('form'),
+            var form = $(this).children('.shopdiv').children('.shopform'),
                 count = form.children('.shopcount').val(),
                 bid = form.children('.shopbid').val(),
-                uid = form.children('.shopuid').val();
+                uid = form.children('.shopuid').val(),
+                money = form.children('.shopmoney').val();
             var obj = {
                 count: count,
                 bid: bid,
-                uid: uid
+                uid: uid,
+                money: money
             };
             arr.push(obj);
+            console.log(arr);
         });
         $.post('/request/add', {cartitem: arr}, function(data) {
             if(data){
@@ -68,7 +73,7 @@ $(function() {
         }, function(data) {
             if(data){
                 if(data == 'success'){
-                    $(that).parent().remove();
+                    $(that).parent().parent().remove();
                 }
             }
         });
@@ -80,13 +85,15 @@ $(function() {
         var sellerid = $(this).siblings('.sellerid').text();
         var bookid = $(this).siblings('.bookid').text();
         var count = $(this).siblings('.count').text();
+        var money = $(this).siblings('.money').text();
         var that = this;
         $.post('/request/confirm',{
             rid: rid,
             buyerid: buyerid,
             sellerid: sellerid,
             bookid: bookid,
-            count: count
+            count: count,
+            money: money
         }, function(data) {
             if(data){
                 if(data == 'success'){
@@ -112,4 +119,26 @@ $(function() {
             }
         });
     });
+    $('#photoupload').submit(function() {
+        console.log('click');
+        $('#status').text('上传中');
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                $('#status').text('Error:'+xhr.status);
+            },
+            success: function(address) {
+                var addr = '/images/' + address;
+                $('#status').text('上传成功');
+                $('#bookimage').val(addr);
+                $('#upphoto').attr('src', addr);
+            }
+        });
+        return false;
+    });
 });
+
+
+//05a5408ab66dd46510efc1a023497d2f
+//GET http://api.douban.com/book/subject/isbn/{isbnID}   alt=json
+
+

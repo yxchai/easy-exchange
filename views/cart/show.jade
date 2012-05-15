@@ -2,15 +2,26 @@ h1 购物车
 if typeof cart !== 'undefined' || cart.length !== 0
   for item in cart
     div.cartitem
-      h2 书名
-      p= item.bookname
-      h2 价格
-      p= item.bookmoney + '元'
-      h2 数量
-      form(method='post', action='/cart/update')
-        input.shopcount(type='text', value= item.count, name='count')
-        input.shopbid(type='hidden', value= item.bid, name='bid')
-        input.shopuid(type='hidden', value= item.uid, name='uid')
-        button(type='submit') 修改
-      a.cartdel(href='#') 删除
+      div.left
+        img(src= item.book.bookimage, width='100')
+      div.left
+        div 书名
+        a(href='/books/' + item.bid)= item.book.bookname
+      div.left
+        div 新旧程度
+        span= item.book.bookoldrate + '%'
+      div.left
+        div 价格
+        span.money= item.money + '元'
+      div.left.shopdiv
+        div 数量
+        form.shopform(method='post', action='/cart/update')
+          input.shopmoney(type='hidden', value= item.money, name='money')
+          input.shopcount(size='1', type='text', value= item.count, name='count')
+          input.shopbid(type='hidden', value= item.bid, name='bid')
+          input.shopuid(type='hidden', value= item.uid, name='uid')
+          button(type='submit') 修改
+      div.left
+        br
+        a.cartdel(href='#') 删除
   button#cartconfirm 确认购买

@@ -5,13 +5,15 @@ var mongoose = require('mongoose'),
 var BookSchema = new Schema({
     bookname: String,
     bookdesc: String,
-    bookimg: [String],
+    bookimage: {type: String, default: '/images/default.jpg'},
     bookdetail: String,
     bookcount: Number,
+    bookoldrate: Number,
     bookmoney: Number,
     bookclass: String,
     booksubclass: String,
-    booktags: String
+    booktags: String,
+    date: {type: Date, default: Date.now}
 });
 
 BookSchema.methods.update = function(obj) {

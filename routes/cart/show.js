@@ -19,8 +19,9 @@ var show = function(req, res) {
                         var obj = {
                             uid: elem.uid,
                             bid: elem.bid,
-                            bookname: result.bookname,
-                            count: elem.count
+                            book: result,
+                            count: elem.count,
+                            money: elem.money
                         };
                         renderopt.cart.push(obj);
                     }

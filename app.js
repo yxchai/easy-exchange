@@ -12,8 +12,23 @@ var express = require('express'),
     request = require('./routes/request'),
     trade = require('./routes/trade'),
     category = require('./routes/category'),
+    table = require('./routes/table'),
+    search = require('./routes/search'),
+    upload = require('./routes/fileupload'),
     MongoStore = require('connect-mongo')(express);
 require('./routes/category/get');
+
+var boundServices = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) : null;
+var credentials = null;
+var db = null;
+var dburl = '';
+if(boundServices == null){
+    dburl = 'mongodb://localhost/websessions';
+}else{
+    credentials = boundServices['mongodb-1.8'][0]['credentials'];
+    dburl = 'mongodb://' + credentials['username'] + ':' + credentials['password'] + '@' + credentials['hostname'] + ':' + credentials['port'] + '/' + credentials['db'];
+}
+console.log(dburl);
 
 var app = module.exports = express.createServer();
 
@@ -22,13 +37,13 @@ var app = module.exports = express.createServer();
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.bodyParser());
+  app.use(express.bodyParser({uploadDir:'./uploads'}));
   app.use(express.methodOverride());
   app.use(express.compiler({ src: __dirname + '/public', enable: ['less']}));
   app.use(express.cookieParser());
   app.use(express.session({
       secret: '14foa13l8l0gf42vcn456m',
-      store: new MongoStore({url: "mongodb://localhost/websessions"}),
+      store: new MongoStore({url: dburl}),
       cookie: {path: '/', maxAge: 60000000*5}
   }));
   app.use(app.router);
@@ -90,5 +105,14 @@ app.get('/category/search', category.search);
 app.get('/category/:num', category.page);
 app.get('/category/:num/:subnum', category.subpage);
 
-app.listen(3000);
+//table router
+app.get('/table/show', table.show);
+
+//search router
+app.get('/search', search.search);
+
+//upload router
+app.post('/fileupload', upload.upload);
+
+app.listen(process.env.VMC_APP_PORT || 3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -27,6 +27,7 @@ var add = function(req, res) {
         sellerid: tmp.uid,
         buyerid: user.uid,
         buyeremail: user.email,
+        money: tmp.money,
         count: tmp.count
     };
     checkcount(obj.sellerid, obj.bookid, obj.count, function(err, result) {

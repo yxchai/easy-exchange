@@ -1,6 +1,12 @@
 h1 添加新的图书
 .outline
+  form#photoupload(method='post', action='/fileupload')
+    img#upphoto(height='50', src='', alt='')
+    label#status 请选择文件
+    input(type='file', name='photo')
+    button#photosubmit(type='submit') 上传
   form(method='post', action='/books/insert')
+    input(name='book[image]', type='hidden')
     label 书名
     br
     input(name='book[bookname]', type='text')
@@ -8,6 +14,11 @@ h1 添加新的图书
     label 描述
     br
     textarea(name='book[bookdesc]', type='text', cols='60', rows='10')
+    br
+    label 新旧程度
+    br
+    input(name='book[bookoldrate]', type='text')
+    span %
     br
     label 价格
     br
@@ -27,4 +38,5 @@ h1 添加新的图书
       for item in category[0].subtag
         option(value=item.name)= item.name
     br
+    input(name='book[bookimage]', id='bookimage', type='hidden', value='/images/default.jpg')
     button(type='submit') 添加

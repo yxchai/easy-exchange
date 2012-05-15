@@ -1,5 +1,10 @@
 h1 修改图书
 .outline
+  form#photoupload(method='post', action='/fileupload')
+    img#upphoto(height='50', src=book.bookimage, alt='')
+    label#status 请选择文件
+    input(type='file', name='photo')
+    button#photosubmit(type='submit') 上传
   form(method='post', action='/books/edit')
     input(type='hidden', name='_method', value='PUT')
     input(type='hidden', name='bid', value=book._id)
@@ -10,6 +15,11 @@ h1 修改图书
     label 描述
     br
     textarea(name='book[bookdesc]', type='text', cols='60', rows='10')= book.bookdesc
+    br
+    label 新旧程度
+    br
+    input(name='book[bookoldrate]', type='text', value= book.bookoldrate)
+    span %
     br
     label 价格
     br
@@ -36,4 +46,5 @@ h1 修改图书
         else
           option(value=item.name)= item.name
     br
+    input(name='book[bookimage]', id='bookimage', type='hidden', value= book.bookimage)
     button(type='submit') 修改

@@ -1,23 +1,37 @@
 h1 请求列表
 for item in requests
-  div
-    h2 买家
-    p= item.buyeremail
-    p.buyerid.hide= item.buyerid
-    h2 卖家
-    p= item.selleremail
-    p.sellerid.hide= item.sellerid
-    h2 书名
-    p= item.bookname
-    p.bookid.hide= item.bookid
-    h2 价格
-    p= item.money + '元'
-    h2 数量
-    p.count= item.count
-    p.rid.hide= item._id
-    if user.uid == item.buyerid
-      a.reqdel(href='/request/del') 删除
-    if user.uid == item.sellerid
-      a.reqconfirm(href='/request/confirm') 确认交易
+  div.reqitem
+    div.left(style='padding: 0; width: 110px;')
+      img(src= item.bookimage, width='100')
       br
-      a.reject(href='/request/reject') 拒绝
+      a(href='/books/' + item.bookid)= item.bookname
+    div.left
+      div 买家
+      span= item.buyeremail
+    div.left
+      div 卖家
+      span= item.selleremail
+    div.left
+      div 新旧程度
+      span= item.bookoldrate + '%'
+    div.left
+      div 价格
+      span.money= item.money + '元'
+    div.left
+      div 数量
+      span.count= item.count
+    div.left
+      p.buyerid.hide= item.buyerid
+      p.sellerid.hide= item.sellerid
+      p.bookid.hide= item.bookid
+      p.rid.hide= item._id
+      p.money.hide= item.money
+      p.count.hide= item.count
+      if user.uid == item.buyerid
+        br
+        a.reqdel(href='/request/del') 删除
+      if user.uid == item.sellerid
+        a.reqconfirm(href='/request/confirm') 确认交易
+        br
+        a.reject(href='/request/reject') 拒绝
+

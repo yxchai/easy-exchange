@@ -25,6 +25,8 @@ var show = function(req, res) {
         User.getBookById(doc[num].bookid, function(result) {
             if(result){
                 doc[num].bookname = result.bookname;
+                doc[num].bookoldrate = result.bookoldrate;
+                doc[num].bookimage = result.bookimage;
             }
             promise++;
             if(promise === doc.length){

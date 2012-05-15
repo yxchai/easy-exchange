@@ -7,6 +7,7 @@ var ListSchema = new Schema({
     sellerid: String,
     buyerid: String,
     bookid: String,
+    money: Number,
     count: Number
 });
 

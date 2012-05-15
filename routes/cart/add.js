@@ -8,6 +8,7 @@ var add = function(req, res) {
     }
     var cart = session.cart;
     var obj = {
+        money: body.money,
         count: body.count,
         bid: body.bid,
         uid: body.uid

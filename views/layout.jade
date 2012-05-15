@@ -7,6 +7,7 @@ html
     link(rel='stylesheet', href='/stylesheets/navigation.css')
     link(rel='stylesheet', href='/stylesheets/page.css')
     script(type='text/javascript', src='/javascripts/jquery-1.7.2.js')
+    script(type='text/javascript', src='/javascripts/jquery.form.js')
     script(type='text/javascript', src='/javascripts/main.js')
   body
     .nav-wrap
@@ -15,15 +16,16 @@ html
           a(href='/')
             img(src='/images/logo.png', alt='websites logo')
         #masthead-nav
-          form(id='site-wide-search', action='')
-            input(placeholder='输入关键字')
+          form(id='site-wide-search', action='/search', method='get')
+            input(placeholder='输入关键字', name='name')
             button(type='submit') 搜索
           p#account-service
             if typeof user !== 'undefined'
               a(href='/user') 管理我的信息
-              a(href='/request/show') 请求
-              a(href='/trade/show') 订单
+              a(href='/request/show') 订单请求
+              a(href='/trade/show') 已完成订单
               a(href='/books') 我的书摊
+              a(href='/table/show') 盈利统计
               a.exit(href='/user/exit') 退出
             else
               a(href='/user/login') 登录/注册

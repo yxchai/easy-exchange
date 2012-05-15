@@ -1,13 +1,29 @@
 h1 个人购物账户
-h2 修改登录密码
+h2 修改个人信息
 .outline
   form(method='post', action='/user/edit')
     input(type='hidden', name='_method', value='PUT')
     h2 安全前提
     p 修改密码前，您必须先输入当前密码
     label 当前密码
+    br
     input(id='password', name='password', type='password')
+    br
     label 新密码
+    br
     input(id='newpwd', name='newpwd', type='password')
+    br
+    label 请输入你的真实姓名
+    br
+    input(type='text', name='username')
+    br
+    label 请输入你的QQ号码
+    br
+    input(type='text', name='qq')
+    br
+    label 请输入你的手机号
+    br
+    input(type='text', name='phone')
+    br
     button(type='submit') 修改
 

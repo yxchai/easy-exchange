@@ -1,2 +1,41 @@
-h1= title
-p Welcome to #{title}
+if hotsell.length != 0
+  div.homelist
+    h2 最热卖书籍
+    for book in hotsell
+      div
+        img(src= book.bookimage, height='100')
+        br
+        a(href='/books/' + book._id)= book.bookname
+        br
+        span.dtitle 分类:
+        span= book.bookclass + '/' + book.booksubclass
+        br
+        span.dtitle 新旧程度:
+        span= book.bookoldrate + '%'
+        br
+        span.dtitle 价格:
+        span.money= book.bookmoney + '元'
+        br
+        span.dtitle 数量:
+        span= book.bookcount
+if newsell.length != 0
+  div.homelist
+    h2 推荐新上架书籍
+    for book in newsell
+      div
+        img(src= book.bookimage, height='100')
+        br
+        a(href='/books/' + book._id)= book.bookname
+        br
+        span.dtitle 分类:
+        span= book.bookclass + '/' + book.booksubclass
+        br
+        span.dtitle 新旧程度:
+        span= book.bookoldrate + '%'
+        br
+        span.dtitle 价格:
+        span.money= book.bookmoney + '元'
+        br
+        span.dtitle 数量:
+        span= book.bookcount
+

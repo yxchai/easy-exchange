@@ -5,6 +5,9 @@ var User = dbhandle.UserModel;
 var add = function(req, res) {
     var body = req.body,
         email = body.email,
+        qq = body.qq,
+        username = body.username,
+        phone = body.phone,
         renderopt = {title: 'Login'};
     User.checkEmail(email, function(err, doc) {
         if (doc) {
