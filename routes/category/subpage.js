@@ -27,7 +27,8 @@ var page = function(req, res) {
                     title: '----分类----' + tmp.name,
                     doc: doc,
                     booksubclass: tmp.name,
-                    user: user
+                    user: user,
+                    category: GLOBAL.category[0].category
                 };
                 res.render('category/subpage', renderopt);
             }

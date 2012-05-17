@@ -11,7 +11,8 @@ var getall = function(req, res) {
         var renderopt = {
             books: result,
             title: "所有图书",
-            user: user
+            user: user,
+            category: GLOBAL.category[0].category
         };
         res.render('book/all', renderopt);
     });

@@ -8,7 +8,8 @@ var info = function(req, res) {
         if(!err){
             res.render('user/info', {
                 title: '个人信息',
-                user: doc
+                user: doc,
+                category: GLOBAL.category[0].category
             });
         }
     });

@@ -80,7 +80,7 @@ app.get('/books', requiresLogin, book.getall);
 app.get('/book', requiresLogin, book.getall);
 app.get('/books/:bid', book.info);
 app.get('/books/:bid/edit', requiresLogin, book.edit);
-app.put('/books/edit', book.update);
+app.put('/books/edit', requiresLogin, book.update);
 app.get('/books/:bid/del', requiresLogin, book.del);
 
 //cart router
@@ -90,15 +90,15 @@ app.post('/cart/del', cart.del);
 app.post('/cart/update', cart.update);
 
 //request router
-app.post('/request/add', request.add);
-app.get('/request/show', request.show);
-app.post('/request/del', request.del);
-app.post('/request/confirm', request.confirm);
-app.post('/request/addone', request.addone);
+app.post('/request/add', requiresLogin, request.add);
+app.get('/request/show', requiresLogin, request.show);
+app.post('/request/del', requiresLogin, request.del);
+app.post('/request/confirm', requiresLogin, request.confirm);
+app.post('/request/addone', requiresLogin, request.addone);
 
 //trade router
-app.get('/trade/show', trade.show);
-app.get('/trade/show/:tid', trade.show);
+app.get('/trade/show', requiresLogin, trade.show);
+app.get('/trade/show/:tid', requiresLogin, trade.show);
 
 //category router
 app.get('/category/search', category.search);
@@ -106,7 +106,7 @@ app.get('/category/:num', category.page);
 app.get('/category/:num/:subnum', category.subpage);
 
 //table router
-app.get('/table/show', table.show);
+app.get('/table/show', requiresLogin, table.show);
 
 //search router
 app.get('/search', search.search);

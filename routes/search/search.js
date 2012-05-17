@@ -5,17 +5,21 @@ var search = function(req, res) {
     var session = req.session,
         user = session.user,
         query = req.query,
-        name = query.name;
+        name = query.name,
+        bclass = query.bclass;
     var qexp = new RegExp('.*' + name + '.*');
-    User.find({'books.bookname': qexp}, function(err, doc) {
+    User.find({'books.bookname': qexp, 'books.bookclass': bclass}, function(err, doc) {
         if(!err){
             if(doc){
                 var renderopt = {
-                    books: doc,
+                    doc: doc,
                     title: "搜索结果",
-                    user: user
+                    user: user,
+                    name: name,
+                    bclass: bclass,
+                    category: GLOBAL.category[0].category
                 };
-                res.render('book/all', renderopt);
+                res.render('search/all', renderopt);
             }
         }
     });

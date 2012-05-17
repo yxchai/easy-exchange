@@ -37,7 +37,8 @@ var page = function(req, res) {
                     bookclass: tmp.name,
                     curcate: params.num,
                     cate: cate,
-                    user: user
+                    user: user,
+                    category: GLOBAL.category[0].category
                 };
                 res.render('category/page', renderopt);
             }

@@ -17,7 +17,10 @@ html
             img(src='/images/logo.png', alt='websites logo')
         #masthead-nav
           form(id='site-wide-search', action='/search', method='get')
-            input(placeholder='输入关键字', name='name')
+            select(name='bclass')
+              for item in category
+                option(value=item.name)= item.name
+            input(type='text', placeholder='输入关键字', name='name')
             button(type='submit') 搜索
           p#account-service
             if typeof user !== 'undefined'

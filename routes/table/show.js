@@ -9,7 +9,8 @@ var show = function(req, res) {
         renderopt = {
             title: '统计信息',
             user: user,
-            rows: []
+            rows: [],
+            category: GLOBAL.category[0].category
         };
     var getlist = function(doc) {
         var books = doc.books;

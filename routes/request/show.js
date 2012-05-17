@@ -12,7 +12,8 @@ var show = function(req, res) {
         var renderopt = {
             title: '请求列表',
             user: user,
-            requests: []
+            requests: [],
+            category: GLOBAL.category[0].category
         };
         if(typeof doc === 'undefined' || doc === null || doc.length ===0){
             res.render('request/show', renderopt);

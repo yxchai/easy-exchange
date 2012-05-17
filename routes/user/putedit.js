@@ -26,7 +26,8 @@ var putedit = function(req, res) {
                 if(err){
                     res.render('user/edit', {
                         title: '个人信息修改',
-                        errInfo: err
+                        errInfo: err,
+                        category: GLOBAL.category[0].category
                     });
                 }else{
                     res.render('user/info', {
@@ -39,6 +40,7 @@ var putedit = function(req, res) {
                             qq: result.qq,
                             username: result.username
                         },
+                        category: GLOBAL.category[0].category,
                         redirect: ''
                     });
                 }
@@ -46,7 +48,8 @@ var putedit = function(req, res) {
         }else{
             res.render('user/edit', {
                 title: '个人信息修改',
-                errInfo: err
+                errInfo: err,
+                category: GLOBAL.category[0].category
             });
         }
     });

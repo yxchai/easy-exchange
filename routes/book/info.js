@@ -13,7 +13,8 @@ var info =  function(req, res) {
                 title: "图书信息",
                 book: result,
                 user: user,
-                uid: uid
+                uid: uid,
+                category: GLOBAL.category[0].category
             };
             res.render('book/info', renderopt);
         }else{

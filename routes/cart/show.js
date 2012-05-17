@@ -8,7 +8,8 @@ var show = function(req, res) {
     var renderopt = {
         title: '购物车',
         cart: [],
-        user: user
+        user: user,
+        category: GLOBAL.category[0].category
     };
     if(cart && cart.length !== 0){
         var promise = 0;

@@ -1,0 +1,26 @@
+br
+h1 图书信息
+for user in doc
+  for book in user.books
+    if book.count != 0
+      - if(book.bookname.search(new RegExp('.*' + name + '.*')) != -1 && book.bookclass == bclass)
+        div.blist
+          div.blistimg
+            img(src= book.bookimage, height='80')
+            br
+            a(href='/books/' + book._id)= book.bookname
+          div.blistinfo
+            span.mgtitle 分类: 
+            span.mtitle= book.bookclass + '/' + book.booksubclass
+            .break
+            span.mgtitle 新旧程度: 
+            span.mtitle= book.bookoldrate + '%'
+            .break
+            span.mgtitle 价格: 
+            span.money= book.bookmoney + '元'
+            .break
+            span.mgtitle 数量: 
+            span.mtitle= book.bookcount
+          div.blistdesc
+            span.mgtitle 描述
+            span.mtitle= book.bookdesc

@@ -8,7 +8,10 @@ var add = function(req, res) {
         qq = body.qq,
         username = body.username,
         phone = body.phone,
-        renderopt = {title: 'Login'};
+        renderopt = {
+            title: 'Login',
+            category: GLOBAL.category[0].category
+        };
     User.checkEmail(email, function(err, doc) {
         if (doc) {
             renderopt.errInfo = '邮箱已使用';

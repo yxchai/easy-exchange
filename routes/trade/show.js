@@ -11,7 +11,8 @@ var show = function(req, res) {
         renderopt = {
             title: "已确认订单",
             user: user,
-            trades: []
+            trades: [],
+            category: GLOBAL.category[0].category
         };
 
     var render = function() {
