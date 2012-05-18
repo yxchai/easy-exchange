@@ -33,17 +33,7 @@ var show = function(req, res) {
                 }
             });
         }else{
-            List.where('_id').in(lists).run(function(err, result) {
-                if(!err){
-                    if(result.length !== 0){
-                        generate(books, result);
-                    }else{
-                        res.render('table/show', renderopt);
-                    }
-                }else{
-                    res.render('table/show', renderopt);
-                }
-            });
+            res.render('table/show', renderopt);
         }
     };
     var generate = function(books, lists) {
