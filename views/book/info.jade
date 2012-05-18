@@ -25,10 +25,11 @@ div.bookinfo
     label.btitle 数量:
     input.upmove(size='1', type='text', id='cartcount')
     button.upmove(id='addcart') 添加到购物车
-  form(method='post', action='/request/addone')
-    input(name='cartitem[money]', id='money', type='hidden', value=book.bookmoney)
-    input(name='cartitem[bid]', id='bid', type='hidden', value=book._id)
-    input(name='cartitem[uid]',id='uid', type='hidden', value=uid)
-    label.btitle 数量:
-    input.upmove(size='1', name='cartitem[count]',type='text')
-    button.upmove(type='submit') 购买
+  if typeof user !== 'undefined'
+    form(method='post', action='/request/addone')
+      input(name='cartitem[money]', id='money', type='hidden', value=book.bookmoney)
+      input(name='cartitem[bid]', id='bid', type='hidden', value=book._id)
+      input(name='cartitem[uid]',id='uid', type='hidden', value=uid)
+      label.btitle 数量:
+      input.upmove(size='1', name='cartitem[count]',type='text')
+      button.upmove(type='submit') 购买

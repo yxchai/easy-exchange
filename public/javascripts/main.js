@@ -18,7 +18,7 @@ $(function() {
     });
     $('.cartdel').click(function() {
         var btn = $(this);
-        var form = $(this).siblings('form');
+        var form = $(this).parent().siblings('.shopdiv').children('form');
         var uid = form.children('.shopuid').val();
         var bid = form.children('.shopbid').val();
         var jqxhr = $.post('/cart/del', {
@@ -27,7 +27,7 @@ $(function() {
         }, function(data) {
             if(data){
                 alert(data);
-                btn.parent().remove();
+                btn.parent().parent().remove();
             }
         });
         return false;
