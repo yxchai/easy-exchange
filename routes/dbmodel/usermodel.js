@@ -206,7 +206,7 @@ UserSchema.methods.delBook = function(bid, cb) {
 };
 
 UserSchema.methods.updateBook =  function(bid, obj, cb) {
-    this.books.id(bid).update(obj);
+    this.books.id(bid).updateobj(obj);
     this.save(function(err) {
         if(!err){
             cb();

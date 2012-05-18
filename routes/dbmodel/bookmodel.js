@@ -16,9 +16,10 @@ var BookSchema = new Schema({
     date: {type: Date, default: Date.now}
 });
 
-BookSchema.methods.update = function(obj) {
+BookSchema.methods.updateobj = function(obj) {
     var item;
-    for(item in this){
+    //var items = ['bookname', 'bookdesc', 'bookimage', 'bookcount', 'bookoldrate', 'bookmoney', 'bookclass', 'booksubclass'];
+    for(item in obj){
         this[item] = obj[item] ? obj[item] : this[item];
     }
 };

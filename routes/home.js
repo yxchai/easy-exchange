@@ -20,7 +20,7 @@ var home = function(req, res) {
         };
     }else{
         renderopt.title = '欢迎来到Easy-Exchange 属于您的二手书交易平台';
-        renderopt.category = category[0].category;
+        renderopt.category = GLOBAL.category[0].category;
     }
     renderopt.hotsell = [];
     renderopt.newsell = [];
