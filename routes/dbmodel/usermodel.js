@@ -27,7 +27,8 @@ UserSchema.statics.checkEmail = function(email, cb) {
 UserSchema.statics.userAuth = function(obj, cb) {
     this.findOne({email: obj.email}, function(err,doc) {
         if(!err){
-            if(doc == null){
+            console.log(doc);
+            if(doc){
                 if(doc.password === obj.password){
                     cb(err, doc);
                 }else{
